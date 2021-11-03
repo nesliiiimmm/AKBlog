@@ -12,5 +12,7 @@ namespace AKBlog.Core.Model
         public string EMail { get; set; }
         public int PostId { get; set; }
         public Posts Post { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

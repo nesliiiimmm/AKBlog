@@ -8,5 +8,6 @@ namespace AKBlog.Core.Model
     public class Tags:_BaseClass
     {
         public string Tag { get; set; }
+        public ICollection<Posts> Posts { get; set; }
     }
 }
