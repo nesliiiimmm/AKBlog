@@ -9,12 +9,12 @@ namespace AKBlog.Core.Services
     public interface IPostService
     {
         Task<IEnumerable<Posts>> GetAllPosts();
-        Task<IEnumerable<Posts>> GetAllWitCategoryhWithCategoryId(int CategoryId);
-        Task<IEnumerable<Posts>> GetAllWitUserhWithUserId(int UserId);
-        Task<IEnumerable<Posts>> GetAllWitTaghWithTagId(int TagId);
+        Task<IEnumerable<Posts>> GetAllCategoryWithCategoryId(int CategoryId);
+        Task<IEnumerable<Posts>> GetAllWithUserWithUserId(int UserId);
+        Task<IEnumerable<Posts>> GetAllWithTagWithTagId(int TagId);
         Task<Posts> GetPostById(int id);
         Task<Posts> CreatePost(Posts newPost);
-        Task UpdatePost(Posts PostToBeUpdated, Posts Post);
+        Task UpdatePost(Posts Post);
         Task DeletePost(Posts Post);
     }
 }

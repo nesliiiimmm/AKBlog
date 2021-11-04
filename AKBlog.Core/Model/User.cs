@@ -13,7 +13,5 @@ namespace AKBlog.Core.Model
         public string Surname { get; set; }
         public string EMail { get; set; }
         public string PhoneNumber { get; set; }
-        public ICollection<Comments> Comments { get; set; }
-        public ICollection<Posts> Posts { get; set; }
     }
 }

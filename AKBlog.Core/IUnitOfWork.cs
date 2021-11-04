@@ -14,5 +14,6 @@ namespace AKBlog.Core
         IPostsRepository Posts { get; }
         ITagsRepository Tags { get; }
         Task<int> CommitAsync();
+        int Commit();
     }
 }

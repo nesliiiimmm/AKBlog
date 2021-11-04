@@ -12,7 +12,5 @@ namespace AKBlog.Core.Services
         Task<Comments> GetCommentById(int id);
         Task<IEnumerable<Comments>> GetAllWithPostWithPostId(int PostId);
         Task<Comments> CreateComment(Comments newComment);
-        Task UpdateComment(Comments CommentToBeUpdated, Comments Comments);
-        Task DeleteComment(Comments Comments);
     }
 }

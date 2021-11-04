@@ -8,6 +8,5 @@ namespace AKBlog.Core.Model
     public class Category:_BaseClass
     {
         public string CategoryName { get; set; }
-        public ICollection<Posts> Posts { get; set; }
     }
 }

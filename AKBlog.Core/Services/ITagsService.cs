@@ -11,7 +11,7 @@ namespace AKBlog.Core.Services
         Task<IEnumerable<Tags>> GetAllTags();
         Task<Tags> GetTagById(int id);
         Task<Tags> CreateTag(Tags newTag);
-        Task UpdateTag(Tags TagToBeUpdated, Tags Tag);
+        Task UpdateTag(Tags Tag);
         Task DeleteTag(Tags Tag);
     }
 }

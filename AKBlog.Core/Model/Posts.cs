@@ -18,7 +18,6 @@ namespace AKBlog.Core.Model
         public Tags Tag { get; set; }
         public string ImageUrl { get; set; }
         public int PostViewCount { get; set; }
-        public ICollection<Comments> Comments { get; set; }
 
     }
 }

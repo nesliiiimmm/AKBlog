@@ -11,7 +11,7 @@ namespace AKBlog.Core.Services
         Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById(int id);
         Task<User> CreateUser(User newUser);
-        Task UpdateUser(User UserToBeUpdated, User User);
+        Task UpdateUser(User User);
         Task DeleteUser(User User);
     }
 }

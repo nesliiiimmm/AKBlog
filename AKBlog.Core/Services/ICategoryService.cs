@@ -11,7 +11,7 @@ namespace AKBlog.Core.Services
         Task<IEnumerable<Category>> GetAllWithCategory();
         Task<Category> GetCategoryById(int id);
         Task<Category> CreateCategory(Category newCategory);
-        Task UpdateCategory(Category categoryToBeUpdated, Category category);
+        Task UpdateCategory(Category category);
         Task DeleteCategory(Category category);
     }
 }

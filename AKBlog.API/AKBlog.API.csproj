@@ -6,7 +6,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AKBlog.Core\AKBlog.Core.csproj" />
+    <ProjectReference Include="..\AKBlog.Data\AKBlog.Data.csproj" />
     <ProjectReference Include="..\AKBlog.Services\AKBlog.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

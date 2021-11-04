@@ -17,10 +17,7 @@ namespace AKBlog.Data.Configuration
             builder.Property(m => m.Comment).IsRequired().HasColumnType("text");
             builder.Property(m => m.EMail).IsRequired().HasMaxLength(250);
             builder.Property(m => m.PostId).IsRequired().HasColumnType("int");
-            builder.HasOne(m => m.Post).WithMany(m=>m.Comments).HasForeignKey(m => m.PostId);
             builder.Property(m => m.UserId).IsRequired().HasColumnType("int");
-            builder.HasOne(m => m.User).WithMany(m => m.Comments).HasForeignKey(m => m.UserId);
-
             builder.Property(m => m.CreatedUser);
             builder.Property(m => m.CreatedTime).HasColumnType("datetime2");
             builder.Property(m => m.UpdatedUser);

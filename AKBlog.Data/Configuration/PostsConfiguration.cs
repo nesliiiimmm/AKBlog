@@ -18,11 +18,8 @@ namespace AKBlog.Data.Configuration
             builder.Property(m => m.ImageUrl).HasMaxLength(250);
             builder.Property(m => m.PostViewCount).IsRequired().HasColumnType("int");
             builder.Property(m => m.CategoryId).IsRequired().HasColumnType("int");
-            builder.HasOne(m => m.Category).WithMany(m => m.Posts).HasForeignKey(m => m.CategoryId);
             builder.Property(m => m.UserId).IsRequired().HasColumnType("int");
-            builder.HasOne(m => m.User).WithMany(m => m.Posts).HasForeignKey(m => m.UserId);
             builder.Property(m => m.TagId).IsRequired().HasColumnType("int");
-            builder.HasOne(m => m.Tag).WithMany(m => m.Posts).HasForeignKey(m => m.TagId);
             
             builder.Property(m => m.CreatedUser);
             builder.Property(m => m.CreatedTime).HasColumnType("datetime2");
