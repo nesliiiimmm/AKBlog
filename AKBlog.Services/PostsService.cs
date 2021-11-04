@@ -1,8 +1,10 @@
 ﻿using AKBlog.Core;
+using AKBlog.Core.Helper;
 using AKBlog.Core.Model;
 using AKBlog.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +32,12 @@ namespace AKBlog.Services
 
         public IEnumerable<Posts> GetAllPosts()
         {
-            return _unitOfWork.Posts.Where(x => x.IsActive == true);
+            var posts = _unitOfWork.Posts.Where(x => x.IsActive == true);
+            var category = _unitOfWork.Categories.Where(x => x.IsActive == true);
+            var result = (from p in posts join 
+                          c in category on p.CategoryId 
+                          equals c.ID select p).ToList();
+            return result;
         }
         public IEnumerable<Posts> GetAllCategoryWithCategoryId(int CategoryId)
         {
@@ -50,12 +57,28 @@ namespace AKBlog.Services
 
         public async Task<Posts> GetPostById(int id)
         {
+            //getpost inner join 
             return await _unitOfWork.Posts.FirstOrDefaultAsync(x => x.ID == id && x.IsActive == true);
         }
 
         public async Task UpdatePost(Posts Post)
         {
             await _unitOfWork.CommitAsync();
+        }
+
+        public List<Posts> GetBestRead5()
+        {
+           var  res=_unitOfWork.Posts.Where(x => x.IsActive == true).ToList();//In this
+            List<Posts> last5post = (List<Posts>)res.OrderByDescending(s => s.PostViewCount);
+            return last5post;
+        }
+
+        public IEnumerable<Posts> GetPostsWithPaging(PageParameters ownerParameters)
+        {
+            return GetAllPosts().OrderBy(on => on.ID)
+                    .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                    .Take(ownerParameters.PageSize)
+                    .ToList();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AKBlog.Core.Helper;
 
 namespace AKBlog.Core.Services
 {
@@ -16,5 +17,7 @@ namespace AKBlog.Core.Services
         Task<Posts> CreatePost(Posts newPost);
         Task UpdatePost(Posts Post);
         Task DeletePost(Posts Post);
+        List<Posts> GetBestRead5();
+        IEnumerable<Posts> GetPostsWithPaging(PageParameters ownerParameters);
     }
 }
