@@ -12,5 +12,9 @@ namespace AKBlog.Data.Repositories
         public CommentsRepository(AKBlogMSSQLDBContext context)
             : base(context)
         { }
+        private AKBlogMSSQLDBContext AKBlogMSSQLDBContext
+        {
+            get { return Context as AKBlogMSSQLDBContext; }
+        }
     }
 }

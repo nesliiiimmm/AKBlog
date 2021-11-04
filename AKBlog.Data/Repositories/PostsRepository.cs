@@ -9,9 +9,13 @@ namespace AKBlog.Data.Repositories
 {
     public class PostsRepository: Repository<Posts>, IPostsRepository
     {
-        AKBlogMSSQLDBContext ctx;
         public PostsRepository(AKBlogMSSQLDBContext context)
             : base(context)
         { }
+
+        private AKBlogMSSQLDBContext AKBlogMSSQLDBContext
+        {
+            get { return Context as AKBlogMSSQLDBContext; }
+        }
     }
 }

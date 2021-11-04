@@ -9,6 +9,6 @@ namespace AKBlog.Core.Repositories
 {
     public interface IUserRepository:IRepository<User>
     {
-        List<Posts> GetUsersWithPosts(int userId);
+        IEnumerable<Posts> GetUsersWithPosts(int userId);
     }
 }

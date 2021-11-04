@@ -11,5 +11,9 @@ namespace AKBlog.Core.Repositories
         public CategoryRepository(AKBlogMSSQLDBContext context)
             : base(context)
         { }
+        private AKBlogMSSQLDBContext AKBlogMSSQLDBContext
+        {
+            get { return Context as AKBlogMSSQLDBContext; }
+        }
     }
 }

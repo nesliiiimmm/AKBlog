@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AKBlog.API.DTO
+{
+    public class SaveTagsDTO : Save_BaseClassDTO
+    {
+        public string Tag { get; set; }
+    }
+}

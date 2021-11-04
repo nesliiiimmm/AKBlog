@@ -8,7 +8,7 @@ namespace AKBlog.Core.Services
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAllWithCategory();
+        IEnumerable<Category> GetAllWithCategory();
         Task<Category> GetCategoryById(int id);
         Task<Category> CreateCategory(Category newCategory);
         Task UpdateCategory(Category category);

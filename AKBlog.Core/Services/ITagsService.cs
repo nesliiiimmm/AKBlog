@@ -8,7 +8,7 @@ namespace AKBlog.Core.Services
 {
     public interface ITagsService
     {
-        Task<IEnumerable<Tags>> GetAllTags();
+        IEnumerable<Tags> GetAllTags();
         Task<Tags> GetTagById(int id);
         Task<Tags> CreateTag(Tags newTag);
         Task UpdateTag(Tags Tag);

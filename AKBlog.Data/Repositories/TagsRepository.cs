@@ -12,5 +12,9 @@ namespace AKBlog.Data.Repositories
         public TagsRepository(AKBlogMSSQLDBContext context)
           : base(context)
         { }
+        private AKBlogMSSQLDBContext AKBlogMSSQLDBContext
+        {
+            get { return Context as AKBlogMSSQLDBContext; }
+        }
     }
 }

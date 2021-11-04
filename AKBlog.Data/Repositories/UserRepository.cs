@@ -11,16 +11,19 @@ namespace AKBlog.Data.Repositories
 {
     public class UserRepository: Repository<User>, IUserRepository
     {
-        AKBlogMSSQLDBContext ctx;
         public UserRepository(AKBlogMSSQLDBContext context)
           : base(context)
         { }
 
-        public List<Posts> GetUsersWithPosts(int userId)
+        public IEnumerable<Posts> GetUsersWithPosts(int userId)
         {
-            List<Posts> data =  ctx.Posts.Where(x => x.UserId == userId).ToList();
+            IEnumerable<Posts> data = AKBlogMSSQLDBContext.Posts.Where(x => x.UserId == userId).ToList();
 
             return data;
+        }
+        private AKBlogMSSQLDBContext AKBlogMSSQLDBContext
+        {
+            get { return Context as AKBlogMSSQLDBContext; }
         }
     }
 }
