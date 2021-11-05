@@ -34,14 +34,16 @@ namespace AKBlog.Services
         {
             var posts = _unitOfWork.Posts.Where(x => x.IsActive == true);
             var category = _unitOfWork.Categories.Where(x => x.IsActive == true);
-            var result = (from p in posts join 
-                          c in category on p.CategoryId 
-                          equals c.ID select p).ToList();
+            var result = (from p in posts
+                          join
+          c in category on p.CategoryId
+          equals c.ID
+                          select p).ToList();
             return result;
         }
         public IEnumerable<Posts> GetAllCategoryWithCategoryId(int CategoryId)
         {
-            return _unitOfWork.Posts.Where(x =>x.CategoryId==CategoryId&& x.IsActive == true);
+            return _unitOfWork.Posts.Where(x => x.CategoryId == CategoryId && x.IsActive == true);
         }
 
         public IEnumerable<Posts> GetAllWithTagWithTagId(int TagId)
@@ -63,12 +65,27 @@ namespace AKBlog.Services
 
         public async Task UpdatePost(Posts Post)
         {
+            Posts p = await _unitOfWork.Posts.FirstOrDefaultAsync(x => x.ID == Post.ID && x.IsActive == true);
+            if (string.IsNullOrEmpty(Post.Name))
+                p.Name = Post.Name;
+            if (string.IsNullOrEmpty(Post.Description))
+                p.Description = Post.Description;
+            if (Post.CategoryId != null && Post.CategoryId != 0)
+                p.CategoryId = Post.CategoryId;
+            if (Post.PostViewCount != null && Post.PostViewCount != 0)
+                p.PostViewCount = Post.PostViewCount;
+            if (Post.UserId != null && Post.UserId != 0)
+                p.UserId = Post.UserId;
+            if(Post.TagId != null && Post.TagId != 0)
+                p.TagId = Post.TagId;
+            if (string.IsNullOrEmpty(Post.ImageUrl))
+                p.ImageUrl = Post.ImageUrl;
             await _unitOfWork.CommitAsync();
         }
 
         public List<Posts> GetBestRead5()
         {
-           var  res=_unitOfWork.Posts.Where(x => x.IsActive == true).ToList();//In this
+            var res = _unitOfWork.Posts.Where(x => x.IsActive == true).ToList();//In this
             List<Posts> last5post = (List<Posts>)res.OrderByDescending(s => s.PostViewCount);
             return last5post;
         }
@@ -79,6 +96,16 @@ namespace AKBlog.Services
                     .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
                     .Take(ownerParameters.PageSize)
                     .ToList();
+        }
+
+        public IEnumerable<Posts> GetPostsWithPagingandCategoryName(PageParameters ownerParameters, string name)
+        {
+            var Category = _unitOfWork.Categories.FirstOrDefaultAsync(x => x.CategoryName == name);
+            return _unitOfWork.Posts.Where(x => x.IsActive == true && x.CategoryId == Category.Result.ID)
+                .OrderBy(on => on.ID)
+                .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                .Take(ownerParameters.PageSize)
+                .ToList();
         }
     }
 }

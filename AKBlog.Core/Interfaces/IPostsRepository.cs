@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace AKBlog.Core.Repositories
 {
-    public interface IPostsRepository:IRepository<Posts>
+    public interface IPostsRepository : IRepository<Posts>
     {
         IEnumerable<Posts> GetPostsWithPaging(PageParameters ownerParameters);
-
-
+        IEnumerable<Posts> GetPostsWithPagingandCategoryName(PageParameters ownerParameters,string Name);
     }
 }

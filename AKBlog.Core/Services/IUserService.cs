@@ -13,5 +13,6 @@ namespace AKBlog.Core.Services
         Task<User> CreateUser(User newUser);
         Task UpdateUser(User User);
         Task DeleteUser(User User);
+        User LoginUser(User user);
     }
 }

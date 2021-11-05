@@ -10,7 +10,7 @@ using System.Text;
 
 namespace AKBlog.Data.Repositories
 {
-    public class PostsRepository: Repository<Posts>, IPostsRepository
+    public class PostsRepository : Repository<Posts>, IPostsRepository
     {
         protected readonly DbContext Context;
         public PostsRepository(AKBlogMSSQLDBContext context)
@@ -24,8 +24,17 @@ namespace AKBlog.Data.Repositories
 
         public IEnumerable<Posts> GetPostsWithPaging(PageParameters ownerParameters)
         {
-            
-            return Context.Set<Posts>().Where(x=>x.IsActive == true)
+
+            return Context.Set<Posts>().Where(x => x.IsActive == true)
+                .OrderBy(on => on.ID)
+                .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                .Take(ownerParameters.PageSize)
+                .ToList();
+        }
+        public IEnumerable<Posts> GetPostsWithPagingandCategoryName(PageParameters ownerParameters, string Name)
+        {
+            var Category = Context.Set<Category>().FirstOrDefault(x => x.CategoryName == Name);
+            return Context.Set<Posts>().Where(x => x.IsActive == true && x.CategoryId == Category.ID)
                 .OrderBy(on => on.ID)
                 .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
                 .Take(ownerParameters.PageSize)

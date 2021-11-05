@@ -1,7 +1,9 @@
-﻿using AKBlog.Core.Model;
+﻿using AKBlog.Core.Helper;
+using AKBlog.Core.Model;
 using AKBlog.Data.Contexts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AKBlog.Core.Repositories
@@ -15,5 +17,6 @@ namespace AKBlog.Core.Repositories
         {
             get { return Context as AKBlogMSSQLDBContext; }
         }
+       
     }
 }

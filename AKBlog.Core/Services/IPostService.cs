@@ -19,5 +19,6 @@ namespace AKBlog.Core.Services
         Task DeletePost(Posts Post);
         List<Posts> GetBestRead5();
         IEnumerable<Posts> GetPostsWithPaging(PageParameters ownerParameters);
+        IEnumerable<Posts> GetPostsWithPagingandCategoryName(PageParameters ownerParameters, string name);
     }
 }

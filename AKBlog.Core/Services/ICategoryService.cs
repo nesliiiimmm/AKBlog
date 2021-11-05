@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AKBlog.Core.Helper;
 
 namespace AKBlog.Core.Services
 {
@@ -13,5 +14,6 @@ namespace AKBlog.Core.Services
         Task<Category> CreateCategory(Category newCategory);
         Task UpdateCategory(Category category);
         Task DeleteCategory(Category category);
+       
     }
 }

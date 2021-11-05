@@ -4,6 +4,7 @@ using AKBlog.Core.Helper;
 using AKBlog.Core.Model;
 using AKBlog.Core.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PagedList.Core;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace AKBlog.Apiv1.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
     public class PostController : ControllerBase
@@ -73,6 +75,7 @@ namespace AKBlog.Apiv1.Controllers
             Result result = new Result();
             try
             {
+                savePostResource.ID = id;
                 var validator = new SavePostsResourceValidator();
                 var validationResult = await validator.ValidateAsync(savePostResource);
 
@@ -189,7 +192,7 @@ namespace AKBlog.Apiv1.Controllers
                 pageParameters.PageSize = pageSize;
                 var res = _postService.GetPostsWithPaging(pageParameters);
                 result.IsSuccess = true;
-                result.Message = "Get Best 5 Post list successfull";
+                result.Message = "Get Post Paging list successfull";
                 result.Status = 200;
                 result.Data = res;
                 return Ok(result);
@@ -202,7 +205,33 @@ namespace AKBlog.Apiv1.Controllers
                 result.Data = null;
                 return Ok(result);
             }
-            
+
+        }
+
+        [HttpGet("api/Post/GetPostWithPagingandCategoryName")]
+        public IActionResult GetPostWithPagingandCategoryName(string Name="Genel",int page=1,int pageSize=5)
+        {
+            Result result = new Result();
+            try
+            {
+                PageParameters pageParameters = new PageParameters();
+                pageParameters.PageNumber = page;
+                pageParameters.PageSize = pageSize;
+                var res = _postService.GetPostsWithPagingandCategoryName(pageParameters,Name);
+                result.IsSuccess = true;
+                result.Message = "Get Post Paging with Category name = "+Name+" successfull";
+                result.Status = 200;
+                result.Data = res;
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+                result.Status = 500;
+                result.Data = null;
+                return Ok(result);
+            }
         }
     }
    
