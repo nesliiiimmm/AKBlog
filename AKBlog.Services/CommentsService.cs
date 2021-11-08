@@ -22,12 +22,18 @@ namespace AKBlog.Services
             return newComment;
         }
 
+        public async Task DeleteComments(Comments comments)
+        {
+            comments.IsActive = false;
+            await _unitOfWork.CommitAsync();
+        }
+
         public IEnumerable<Comments> GetAllComments()
         {
             return  _unitOfWork.Comments.Where(x => x.IsActive == true);
         }
 
-        public IEnumerable<Comments> GetAllWithPostWithPostId(int PostId)//Sql Injection olur mu kontrol et ?
+        public IEnumerable<Comments> GetAllWithPostWithPostId(int PostId)
         {
             return _unitOfWork.Comments.Where(x =>x.PostId==PostId && x.IsActive == true);
         }
@@ -35,6 +41,11 @@ namespace AKBlog.Services
         public async Task<Comments> GetCommentById(int id)
         {
             return await _unitOfWork.Comments.FirstOrDefaultAsync(x => x.ID == id && x.IsActive == true);
+        }
+
+        public async Task UpdateComments(Comments comments)
+        {
+            await _unitOfWork.CommitAsync();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AKBlog.Core;
+using AKBlog.Core.Helper;
 using AKBlog.Core.Model;
 using AKBlog.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,14 @@ namespace AKBlog.Services
         public  Task<Category> GetCategoryById(int id)//burda IsActive kısımları kontrol etmek gerekiyor 
         {
             return  _unitOfWork.Categories.FirstOrDefaultAsync(x => x.ID == id && x.IsActive == true);
+        }
+
+        public IEnumerable<Category> GetCategoryWithPaging(PageParameters ownerParameters)
+        {
+            return GetAllWithCategory().OrderBy(on => on.ID)
+                    .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                    .Take(ownerParameters.PageSize)
+                    .ToList();
         }
 
         public async Task UpdateCategory(Category category)

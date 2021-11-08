@@ -14,6 +14,7 @@ namespace AKBlog.Core.Services
         Task<Category> CreateCategory(Category newCategory);
         Task UpdateCategory(Category category);
         Task DeleteCategory(Category category);
-       
+        IEnumerable<Category> GetCategoryWithPaging(PageParameters ownerParameters);
+
     }
 }

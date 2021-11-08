@@ -11,6 +11,8 @@ namespace AKBlog.Core.Services
         IEnumerable<Comments> GetAllComments();
         Task<Comments> GetCommentById(int id);
         IEnumerable<Comments> GetAllWithPostWithPostId(int PostId);
+        Task UpdateComments(Comments comments);
+        Task DeleteComments(Comments comments);
         Task<Comments> CreateComment(Comments newComment);
     }
 }
