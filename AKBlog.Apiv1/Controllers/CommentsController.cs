@@ -141,7 +141,7 @@ namespace AKBlog.Apiv1.Controllers
             try
             {
                 var res = await _CommentService.GetCommentById(id);
-                await _CommentService.DeleteComment(res);
+                await _CommentService.DeleteComments(res);
 
                 result.IsSuccess = true;
                 result.Message = "Comment with id= " + id + "Deleted successfull";
